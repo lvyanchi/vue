@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>-->
+    <script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+    <style>
+        .one{
+            height:200px;
+            width:200px;
+            background-color: #00d4b4;
+        }
+
+        .active{
+            float:right;
+        }
+
+        .unactive{
+            height:500px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div v-for="(name, index) in names">
+            <p>{{index}} --- {{name.lastName}}</p>
+        </div>
+
+        <li v-for="(key, value) in student">
+            {{key}}: {{value}}
+        </li>
+
+        <li v-for="n in 10">
+            {{n}}
+        </li>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                names:[
+                    {'firstName': 'lv', lastName:'yclv', sex:'male'},
+                    {'firstName': 'lv', lastName:'yibao', sex:'male'},
+                    {'firstName': 'shi', lastName:'xiaotian', sex:'female'},
+                ],
+                student:{
+                    name:'xiaoming',
+                    age:18,
+                    address:'shanghai'
+                }
+            }
+        })
+        //vue2.0已丢弃，可使用Vue.set
+        //vm.names.$set(0, {lastName:'xiaoli', sex:'female'});
+        Vue.set(vm.names, 0, {lastName:'xiaoli', sex:'female'});
+        console.log(vm.names);
+    </script>
+</body>
+</html>

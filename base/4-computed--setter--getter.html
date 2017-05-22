@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>
+    <!--<script src="hello.js"></script>-->
+</head>
+<body>
+    <div id="app">
+        <p>a的值为：{{a}}</p>
+        <p>b的值为：{{b}}</p>
+        <span id="id-{{name}}">name的值为：{{* name}}</span>
+        <div v-bind:id=name>name的值为：{{* name}}</div>
+        <div :id=name>name的值为：{{* name}}</div>
+        <div :id=name>name的大写值为：{{name | uppercase}}</div>
+        <div :id=name>name的首字母大写值为：{{name | capitalize}}</div>
+        <div :id=name>amount的货币形式为：{{amount | currency '￥'}}</div>
+        <div :id=index>index：{{index + 5}}</div>
+        <button v-on:click="alert">alert</button>
+        <button v-on:click="eventAlert">event.alert</button>
+    </div>
+    <div id="input">
+
+    </div>
+    <script>
+        var data = {
+                        a:1,
+                        b:undefined,
+                        c:0,
+                        //price:0,
+                        cents:0,
+                        index:0,
+                        name:'vue',
+                        avatar: 'http://......',
+                        amount:100,
+                        count:[1,2,3,4,5],
+                        namePrefix:'hello,',
+                        names:['vue', 'angular'],
+                        items:[
+                            {name:'vue1.0', version:'1.0'},
+                            {name:'vue2.0', version:'2.0'}
+                        ]
+                    }
+        var vm = new Vue({
+            el: '#app',
+            data: data,
+            created: function(){
+                console.log("vue created");
+            },
+            computed: {
+                c : function() {
+                    return this.a + 20;
+                },
+                d :function() {
+                    return this.a + 100;
+                },
+                fullName: function(){
+                    return this.namePrefix + this.names[0];
+                },
+                price: {
+                    set: function(newValue){
+                        this.cents = newValue*100;
+                    },
+                    get:function(){
+                        return (this.cents/100).toFixed(2);
+                    }
+                }
+
+            },
+            methods:{
+                alert: function(){
+                    alert(this.b)
+                },
+                eventAlert: function () {
+                    alert("this is event alert")
+                }
+            }
+        })
+        console.log("之前的c:" + vm.c);
+        console.log("之前的d:" + vm.d);
+        vm.a = 10;
+        console.log("之后的c:" + vm.c);
+        console.log("之后的d:" + vm.d);
+        console.log(this.fullName);
+        vm.price = 10;
+       // vm.cents = 2000;
+        console.log(vm.price);
+        console.log(vm.cents);
+    </script>
+</body>
+</html>

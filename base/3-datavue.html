@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>
+    <!--<script src="hello.js"></script>-->
+</head>
+<body>
+    <div id="app">
+        <p>a的值为：{{a}}</p>
+        <p>b的值为：{{b}}</p>
+        <span id="id-{{name}}">name的值为：{{* name}}</span>
+        <div v-bind:id=name>name的值为：{{* name}}</div>
+        <div :id=name>name的值为：{{* name}}</div>
+        <div :id=name>name的大写值为：{{name | uppercase}}</div>
+        <div :id=name>name的首字母大写值为：{{name | capitalize}}</div>
+        <div :id=name>amount的货币形式为：{{amount | currency '￥'}}</div>
+        <div :id=index>index：{{index + 5}}</div>
+        <button v-on:click="alert">alert</button>
+        <button v-on:click="eventAlert">event.alert</button>
+    </div>
+    <div id="input">
+
+    </div>
+    <script>
+        var data = {
+                        a:1,
+                        b:undefined,
+                        index:0,
+                        name:'vue',
+                        avatar: 'http://......',
+                        amount:100,
+                        count:[1,2,3,4,5],
+                        names:['vue', 'angular'],
+                        items:[
+                            {name:'vue1.0', version:'1.0'},
+                            {name:'vue2.0', version:'2.0'}
+                        ]
+                    }
+        var vm = new Vue({
+            el: '#app',
+            data: data,
+            init: function(){
+                console.log("init");
+            },
+            created: function(){
+                console.log("vue created");
+            },
+            beforeCompile: function(){
+                console.log("beforeCompile");
+            },
+            compiled: function(){
+                console.log("compiled");
+            },
+            attached: function(){
+                console.log("attached");
+            },
+            dettached: function(){
+                console.log("dettached");
+            },
+            beforeDestroy: function(){
+                console.log("beforeDestroy");
+            },
+            destroyed: function(){
+                console.log("destroyed");
+            },
+            ready: function(){
+                console.log("ready");
+                this.$destroy();
+            },
+            computed: {
+                // 一个计算属性的 getter
+                b: function () {
+                    // `this` 指向 vm 实例
+                    return this.a + 1
+                }
+            },
+            methods:{
+                alert: function(){
+                    alert(this.b)
+                },
+                eventAlert: function () {
+                    alert("this is event alert")
+                }
+            }
+        })
+        console.log(vm.$data === data)
+        console.log(vm.a === data.a)
+        vm.a = 2
+        data.a = 3
+        //初始化时传入的对象才具有响应式
+        //vm.$data.b = 2
+        //如果需要在实例化之后加入响应式变量，需要调用实例方法$set
+        vm.$set('b', 4)
+        vm.$emit('eventAlert')
+
+    </script>
+</body>
+</html>

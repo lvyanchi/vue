@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>-->
+    <script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p>{{date}}</p>
+        <p>{{date | date}}</p>
+    </div>
+    <script>
+        Vue.filter('date', function(value){
+            if(!value instanceof Date){
+                return value;
+                console.log(value);
+            }
+            return value.toLocaleDateString();
+        });
+
+        Vue.filter('cents', {
+           read: function(value){
+
+           },
+           write : function(value){
+               return value*100;
+           }
+        });
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg:'hello, vue.js',
+                date: new Date()
+            },
+            methods:{
+                say: function(){
+                    alert(this.msg);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>-->
+    <script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="message" number><br>
+        <div>your input is: {{message}}</div>
+        <input type="text" v-model.lazy="txt"><br>
+        <div>your input is : {{txt}}</div>
+        <!-- vue2.0去除了这个参数 -->
+        <input type="text" v-model="msg" debounce="4000"><br>
+        <div>your input is : {{msg}}</div>
+        <label><input type="radio" value="male" v-model="gender">男</label>
+        <label><input type="radio" value="female" v-model="gender">女</label>
+        <p>{{gender}}</p>
+        <!--<input type="checkbox" value="aa" v-model="checked" v-bind:true-value="a" v-bind:false-value="b">-->
+        <input type="checkbox" value="aa" v-model="checked" v-bind:true-value="a" v-bind:false-value="b">
+        <p>{{checked}}</p>
+        <input type="checkbox" value="1" v-model="multiChecked">
+        <input type="checkbox" value="2" v-model="multiChecked">
+        <input type="checkbox" value="3" v-model="multiChecked">
+        <p>{{multiChecked}}</p>
+        <select v-model="selected">
+            <option value="111">aaa</option>
+            <option value="222">bbb</option>
+            <option value="333">ccc</option>
+        </select>
+        <p>{{selected}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: '',
+                msg:'',
+                txt:'',
+                gender: '',
+                checked: '',
+                multiChecked:[],
+                selected:'',
+                multiSelected:[],
+                a:'',
+                b:''
+            },
+            created: function(){
+                console.log("vue created");
+            }
+        })
+        //vm.checked == vm.a;
+    </script>
+</body>
+</html>

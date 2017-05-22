@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>-->
+    <script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p v-text="msg">aa </p>
+        <p>{{msg}}</p>
+        <p v-HTML="hStr"></p>
+        <div v-el:demo>this is a el demo</div>
+        <message v-ref:title content="title"></message>
+        <message v-ref:sub-title content="subTitle"></message>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg:'hello, vue.js',
+                avatar:'http://cnximage.b0.upaiyun.com/lbyc/others/20170427093607118.jpg',
+                hStr:'this is html'
+            },
+            beforeCompile: function(){
+                debugger;
+                console.log("before compile");
+            },
+            methods:{
+                say: function(){
+                    alert(this.msg);
+                },
+                speak: function(from){
+                    alert("speak loud " + from);
+                },
+                showEvent: function(event){
+                    console.log(event);
+                }
+            }
+        })
+
+        var Message = Vue.extend({
+            props: ['content'],
+            template: '<h1>{{content}}</h1>'
+        });
+        Vue.component('message', Message);
+
+        console.log(vm.$refs.title);
+        console.log(vm.$refs.subTitle);
+    </script>
+</body>
+</html>

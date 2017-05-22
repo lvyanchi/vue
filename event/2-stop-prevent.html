@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>-->
+    <script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div v-on:click="saySelf('click from inner')" v-on:click.self="saySelf('click from self')">
+            <button v-on:click="saySelf('button click')">单纯点击</button>
+            <button v-on:click.stop="saySelf('just button click')">阻止事件冒泡点击</button>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg:'hello, vue.js'
+            },
+            methods:{
+                saySelf: function(message){
+                    alert(message);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

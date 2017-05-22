@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>-->
+    <script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p v-pre>{{hStr}}</p>
+        <p v-cloak>{{msg}}</p>
+        <p v-once>{{avatar}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg:'hello, vue.js',
+                avatar:'http://cnximage.b0.upaiyun.com/lbyc/others/20170427093607118.jpg',
+                hStr:'this is html'
+            },
+            methods:{
+                say: function(){
+                    alert(this.msg);
+                },
+                speak: function(from){
+                    alert("speak loud " + from);
+                },
+                showEvent: function(event){
+                    console.log(event);
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>
