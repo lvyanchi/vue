@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>-->
+    <script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <parent-component></parent-component>
+        <yclv-parent></yclv-parent>
+        <!--<my-child></my-child>-->
+    </div>
+    <script>
+        //局部注册第一种注册方法
+        var Child = Vue.extend({
+            template: '<p>this is a child component</p>'
+        });
+
+        var Parent = Vue.extend({
+            template: '<div><p>this is a parent compnent</p><my-child></my-child></div>',
+            components:{
+                'my-child': Child
+            }
+        });
+
+        Vue.component('parent-component', Parent);
+
+
+        //局部注册第二种注册方法
+        var YclvParent = Vue.extend({
+            template: '<div><p>this is a yclv parent compnent</p><yclv-child></yclv-child></div>',
+            components:{
+                'yclv-child':{
+                    template:'<p>this is a yclv child component</p>'
+                }
+            }
+        })
+
+        Vue.component('yclv_parent', YclvParent);
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg:'hello, vue.js'
+            },
+            methods:{
+                saySelf: function(message){
+                    alert(message);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

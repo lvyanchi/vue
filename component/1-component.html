@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>-->
+    <script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my-component></my-component>
+        <yclv></yclv>
+        <!--<my-child></my-child>-->
+    </div>
+    <script>
+        //全局注册第一种注册方法
+        var MyComponent = Vue.extend({
+            template: '<div>first<p>this is a component</p></div>'
+        })
+        Vue.component('my-component', MyComponent);
+
+
+        //全局注册第二种注册方法
+        Vue.component('yclv', {
+            template: '<a href="#">click me</a>'
+        })
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg:'hello, vue.js'
+            },
+            methods:{
+                saySelf: function(message){
+                    alert(message);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
